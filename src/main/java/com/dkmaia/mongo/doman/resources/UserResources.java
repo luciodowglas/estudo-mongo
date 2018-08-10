@@ -1,28 +1,26 @@
 package com.dkmaia.mongo.doman.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dkmaia.mongo.doman.User;
+import com.dkmaia.mongo.services.UserServices;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResources {
 
+	@Autowired
+	private UserServices service;
+
 	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
-		User lucio = new User("1", "Lucio Maia", "lucio@live.com");
-		User dowglas = new User("2", "Dowglas Maia", "lucio@live.com");
-		User maria = new User("3", "Maria Natash", "lucio@live.com");
-		List<User> list = new ArrayList<>();
-		list.addAll(Arrays.asList(lucio, dowglas, maria));
-
+		List<User> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 }
