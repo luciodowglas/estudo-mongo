@@ -34,6 +34,12 @@ public class UserServices {
 		return userRepo.insert(obj);
 	}
 
+	//Metodo Deletar por ID
+	public void delete(String id) {
+		findById(id);
+		userRepo.deleteById(id);
+	}
+
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
