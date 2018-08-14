@@ -1,11 +1,14 @@
 package com.dkmaia.mongo.doman;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.dkmaia.mongo.dto.AuthorDTO;
+import com.dkmaia.mongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable {
@@ -17,9 +20,13 @@ public class Post implements Serializable {
 	private String body;
 	private AuthorDTO author;
 
+	private List<CommentDTO> comments = new ArrayList<>();
+
+	//Construtor Padrão
 	public Post() {
 	}
 
+	//Construtor com Argumentos
 	public Post(AuthorDTO author, String id, Date date, String title, String body) {
 		super();
 		this.id = id;
@@ -68,6 +75,14 @@ public class Post implements Serializable {
 
 	public void setAuthorDTO(AuthorDTO author) {
 		this.author = author;
+	}
+
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
 	}
 
 	@Override
