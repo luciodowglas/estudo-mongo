@@ -37,13 +37,16 @@ public class InstantionRun implements CommandLineRunner {
 		User Kamilly = new User(null, "Kamilly Maia", "kamilly@gmail.com");
 		userRepository.saveAll(Arrays.asList(Dowglas, Kayron, Kamilly)); // Salvar Os Usuarios
 
-		//***
+		// ***
 		Post post1 = new Post(new AuthorDTO(Dowglas), null, sdf.parse("10/05/2015"), "Partiu Porto-PT !",
 				"Estou Mundando Para Porto!");
 		Post post2 = new Post(new AuthorDTO(Dowglas), null, sdf.parse("20/07/2015"), "Aqui é só Sucesso !",
 				"Apoixonei por Porto, Cidade Maravilhosa!");
 
 		postRepository.saveAll(Arrays.asList(post1, post2)); // Salvar Os Posts
+
+		Dowglas.getPosts().addAll(Arrays.asList(post1, post2));
+		userRepository.save(Dowglas);
 
 	}
 
