@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.dkmaia.mongo.doman.Post;
 import com.dkmaia.mongo.doman.User;
 import com.dkmaia.mongo.dto.UserDTO;
 import com.dkmaia.mongo.services.UserServices;
@@ -62,6 +63,13 @@ public class UserResources {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+
+	// metodo para Listar os Post dos Usuarios por ID do mesmo
+	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> findPost(@PathVariable String id) {
+		User user = service.findById(id);
+		return ResponseEntity.ok().body(user.getPosts());
 	}
 
 }
